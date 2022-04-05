@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Security.Application;
+﻿using Microsoft.AspNetCore.Mvc;
 using Pokedex.Filters;
 using Pokedex.Models;
 using Pokedex.Services;

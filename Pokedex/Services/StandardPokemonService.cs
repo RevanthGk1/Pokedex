@@ -23,28 +23,9 @@ namespace Pokedex.Services
             string response = string.Empty;
             PokeApiClient client = new(_configuration);
             response = await client.GetAsync(name);
-            PokemonSpecies pokemonSpecies = ProcessResponse(response);
-            Pokemon pokemon = Map(pokemonSpecies);
-            return pokemon;
-        }
-
-        private static PokemonSpecies ProcessResponse(string response)
-        {
-            PokemonSpecies pokemonSpecies = JsonConvert.DeserializeObject<PokemonSpecies>(response);
-            return pokemonSpecies;
-        }
-
-        private static Pokemon Map(PokemonSpecies pokemonSpecies)
-        {
-            Pokemon pokemon = new()
-            {
-                Name = pokemonSpecies.Name,
-                Id = pokemonSpecies.Id,
-                Description = pokemonSpecies.FlavorTextEntries.FirstOrDefault(x => x.Language.Name == "en").FlavorText,
-                Habitat = pokemonSpecies.Habitat.Name,
-                IsLegendary = pokemonSpecies.IsLegendary
-            };
-
+            //PokemonSpecies pokemonSpecies = (PokemonSpecies)CommonService.DeserializeResponse(response, typeof(PokemonSpecies));
+            PokemonSpecies pokemonSpecies = (PokemonSpecies)JsonConvert.DeserializeObject<PokemonSpecies>(response);
+            Pokemon pokemon = CommonService.MapToPokemon(pokemonSpecies);
             return pokemon;
         }
     }
