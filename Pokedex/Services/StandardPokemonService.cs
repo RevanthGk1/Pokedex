@@ -22,9 +22,8 @@ namespace Pokedex.Services
         {
             string response = string.Empty;
             PokeApiClient client = new(_configuration);
-            response = await client.GetAsync(name);
-            //PokemonSpecies pokemonSpecies = (PokemonSpecies)CommonService.DeserializeResponse(response, typeof(PokemonSpecies));
-            PokemonSpecies pokemonSpecies = (PokemonSpecies)JsonConvert.DeserializeObject<PokemonSpecies>(response);
+            response = await client.GetPokemonByNameAsync(name);
+            PokemonSpecies pokemonSpecies = JsonConvert.DeserializeObject<PokemonSpecies>(response);
             Pokemon pokemon = CommonService.MapToPokemon(pokemonSpecies);
             return pokemon;
         }

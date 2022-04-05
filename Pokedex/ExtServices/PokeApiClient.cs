@@ -3,31 +3,32 @@
     public class PokeApiClient
     {
         private readonly IConfiguration _configuration;
+        private readonly string _uri;
+        private readonly HttpClient _client;
 
         public PokeApiClient(IConfiguration configuration)
         {
             _configuration = configuration;
+            _uri = _configuration["Urls:pokiApi"];
+            _client = new HttpClient();
         }
 
-        public async Task<string> GetAsync(string name)
+        public async Task<string> GetPokemonByNameAsync(string name)
         {
-            var client = new HttpClient();
-            string body = string.Empty;
-            var uri = _configuration["Urls:pokiApi"];
-
+            string content = string.Empty;
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(uri + name),
+                RequestUri = new Uri(_uri + name),
             };
 
-            using (var response = client.Send(request))
+            using (var response = _client.Send(request))
             {
                 response.EnsureSuccessStatusCode();
-                body = await response.Content.ReadAsStringAsync();
+                content = await response.Content.ReadAsStringAsync();
             }
 
-            return body;
+            return content;
         }
     }
 }

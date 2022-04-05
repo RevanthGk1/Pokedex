@@ -28,8 +28,7 @@ namespace Pokedex.Controllers
         }
 
         /// <summary>
-        /// Gets Pokemon details like Name, Description, Habitat, Is_Legendary etc.
-        /// Api:Pokemon/v1/Translated/<paramref name="name"/>.
+        /// Gets Pokemon details with Translated Description
         /// </summary>
         /// <param name="name">name.</param>
         /// <returns><see cref="Pokemon"/> type object/json.</returns>
