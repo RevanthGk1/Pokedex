@@ -1,1 +1,1 @@
-start chrome "https://localhost:5000/swagger/index.html"
+start chrome "http://localhost:5000/swagger/index.html"

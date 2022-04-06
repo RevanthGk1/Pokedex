@@ -10,11 +10,11 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Pokedex/Pokedex.csproj", "Pokedex/"]
-RUN dotnet restore "Pokedex/Pokedex.csproj"
+COPY ["Pokedex.csproj", "./"]
+RUN dotnet restore "./Pokedex.csproj"
 COPY . .
-WORKDIR "/src/Pokedex"
 RUN dotnet build "Pokedex.csproj" -c Release -o /app/build
+
 
 FROM build AS publish
 RUN dotnet publish "Pokedex.csproj" -c Release -o /app/publish
