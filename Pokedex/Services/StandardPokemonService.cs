@@ -10,13 +10,12 @@ namespace Pokedex.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IMemoryCache _memoryCache;
-        private readonly CacheManager _cache;
+        private readonly StandardCacheManager _cacheManager;
 
-        public StandardPokemonService(IConfiguration configuration, IMemoryCache memoryCache)
+        public StandardPokemonService(IConfiguration configuration, StandardCacheManager cacheManager)
         {
             _configuration = configuration;
-            _memoryCache = memoryCache;
-            _cache = new CacheManager(_memoryCache);
+            _cacheManager = cacheManager;
         }
 
         /// <summary>
@@ -26,14 +25,14 @@ namespace Pokedex.Services
         /// <returns>A <see cref="Task{Pokemon}"/> representing the result of the asynchronous operation.</returns>
         public async Task<Pokemon> GetAsync(string name)
         {
-            Pokemon pokemon = (Pokemon)_cache.Get(name);
+            Pokemon pokemon = (Pokemon)_cacheManager.Get(name);
             if (pokemon == null || string.IsNullOrEmpty(pokemon.Description))
             {
                 PokeApiClient client = new(_configuration);
                 string response = await client.GetPokemonByNameAsync(name, CancellationToken.None);
                 PokemonSpecies pokemonSpecies = JsonConvert.DeserializeObject<PokemonSpecies>(response);
                 pokemon = MapperService.MapToPokemon(pokemonSpecies);
-                _cache.Set(name, pokemon);
+                _cacheManager.Set(name, pokemon);
             }
 
             return pokemon;

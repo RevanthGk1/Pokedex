@@ -3,6 +3,7 @@ using Pokedex.Filters;
 using Pokedex.Services;
 using Pokedex.Models;
 using Microsoft.Extensions.Caching.Memory;
+using Pokedex.Cache;
 
 namespace Pokedex.Controllers
 {
@@ -21,13 +22,13 @@ namespace Pokedex.Controllers
 
         private readonly ILogger<TranslatedPokemonController> _logger;
         private readonly IConfiguration _configuration;
-        private readonly IMemoryCache _memoryCache;
+        private readonly TranslatedCacheManager _cacheManager;
 
-        public TranslatedPokemonController(ILogger<TranslatedPokemonController> logger, IConfiguration configuration, IMemoryCache memoryCache)
+        public TranslatedPokemonController(ILogger<TranslatedPokemonController> logger, IConfiguration configuration, TranslatedCacheManager cacheManager)
         {
             _logger = logger;
             _configuration = configuration;
-            _memoryCache = memoryCache;
+            _cacheManager = cacheManager;
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace Pokedex.Controllers
         [Route("{name?}")]
         public IActionResult Get(string? name)
         {
-            TranslatedPokemonService svc = new(_configuration, _memoryCache);
+            TranslatedPokemonService svc = new(_configuration, _cacheManager);
             Task<Pokemon> pokemon = svc.GetAsync(name);
             return Ok(pokemon.Result);
         }
