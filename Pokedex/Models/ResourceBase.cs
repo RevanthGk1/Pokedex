@@ -16,4 +16,9 @@ namespace Pokedex.Models
         /// </summary>
         public static string ApiEndpoint { get; }
     }
+
+    /// <summary>
+    /// The base class for API resources that don't have a name property
+    /// </summary>
+    public abstract class ApiResource : ResourceBase { }
 }
