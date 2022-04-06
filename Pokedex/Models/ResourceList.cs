@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Pokedex.Models
+﻿namespace Pokedex.Models
 {
     /// <summary>
     /// The base class for all resource lists

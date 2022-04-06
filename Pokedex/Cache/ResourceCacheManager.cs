@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Pokedex.Models;
-using System;
 using System.Collections.Immutable;
 
 namespace Pokedex.Cache
