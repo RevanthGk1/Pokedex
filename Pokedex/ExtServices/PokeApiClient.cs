@@ -13,7 +13,7 @@
             _client = new HttpClient();
         }
 
-        public async Task<string> GetPokemonByNameAsync(string name)
+        public async Task<string> GetPokemonByNameAsync(string name, CancellationToken ctoken)
         {
             string content = string.Empty;
             var request = new HttpRequestMessage
@@ -22,7 +22,7 @@
                 RequestUri = new Uri(_uri + name),
             };
 
-            using (var response = _client.Send(request))
+            using (var response = _client.Send(request, ctoken))
             {
                 response.EnsureSuccessStatusCode();
                 content = await response.Content.ReadAsStringAsync();
