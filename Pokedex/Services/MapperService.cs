@@ -1,17 +1,14 @@
-﻿using Newtonsoft.Json;
-using Pokedex.Models;
+﻿using Pokedex.Models;
 
 namespace Pokedex.Services
 {
-    public class CommonService
+    public class MapperService
     {
         /// <summary>
-        /// Maps the .
-        /// A generic object is returned of type mentioned in param. usage requires explicitly typecasted.
+        /// Maps the from PokemonSpecies to Pokemon object.
         /// </summary>
-        /// <param name="response">json string.</param>
-        /// /// <param name="type">class type.</param>
-        /// <returns><see cref="object"/> Generic object.</returns>
+        /// <param name="pokemonSpecies">pokemonSpecies.</param>
+        /// <returns><see cref="Pokemon"/> Pokemon.</returns>
         public static Pokemon MapToPokemon(PokemonSpecies pokemonSpecies)
         {
             Pokemon pokemon = new()
@@ -25,6 +22,5 @@ namespace Pokedex.Services
 
             return pokemon;
         }
-
     }
 }

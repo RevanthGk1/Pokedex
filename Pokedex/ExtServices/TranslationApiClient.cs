@@ -1,8 +1,6 @@
 ﻿using Microsoft.Security.Application;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 using Pokedex.Models;
-using Pokedex.Services;
 
 namespace Pokedex.ExtServices
 {

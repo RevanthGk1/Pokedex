@@ -24,11 +24,16 @@ namespace Pokedex.Services
             PokeApiClient client = new(_configuration);
             response = await client.GetPokemonByNameAsync(name);
             PokemonSpecies pokemonSpecies = JsonConvert.DeserializeObject<PokemonSpecies>(response);
-            Pokemon pokemon = CommonService.MapToPokemon(pokemonSpecies);
+            Pokemon pokemon = MapperService.MapToPokemon(pokemonSpecies);
             this.TranslateDescription(pokemon);
             return pokemon;
         }
 
+        /// <summary>
+        /// Calls the client to get the translation based on legendary status & habitat.
+        /// </summary>
+        /// <param name="pokemon">pokemon</param>
+        /// <returns>A <see cref="Task{Pokemon}"/> representing the result of the asynchronous operation.</returns>
         public async void TranslateDescription(Pokemon pokemon)
         {
             string habitat = _configuration["spclHabitat"];
