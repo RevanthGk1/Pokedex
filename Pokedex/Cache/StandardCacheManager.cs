@@ -35,6 +35,5 @@ namespace Pokedex.Cache
         {
             _standardMemoryCache.Remove(name);
         }
-
     }
 }

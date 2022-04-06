@@ -5,7 +5,6 @@ namespace Pokedex.Filters
 {
     public class CustomExceptionFilter : IExceptionFilter
     {
-
         private readonly ILogger<CustomExceptionFilter> _logger;
 
         public CustomExceptionFilter(ILogger<CustomExceptionFilter> logger)
@@ -19,8 +18,11 @@ namespace Pokedex.Filters
             {
                 context.Result = new NotFoundObjectResult("Pokemon Not found");
             }
-
-            _logger.LogError(context.Exception, context.HttpContext.Request.Body.ToString());
+            else
+            {
+                _logger.LogError(context.Exception, context.HttpContext.Request.Body.ToString());
+            }
+            
         }
     }
 }

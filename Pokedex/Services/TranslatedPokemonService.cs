@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Security.Application;
 using Newtonsoft.Json;
 using Pokedex.Cache;
 using Pokedex.ExtServices;
@@ -28,15 +29,15 @@ namespace Pokedex.Services
             Pokemon pokemon = (Pokemon)_cacheManager.Get(name);
             if (pokemon == null || string.IsNullOrEmpty(pokemon.Description))
             {
-                PokeApiClient client = new(_configuration);
-                string response = await client.GetPokemonByNameAsync(name, CancellationToken.None);
+                PokeApiClient client = new();
+                string uri = _configuration["Urls:pokiApi"];
+                string response = await client.GetPokemonByNameAsync(name, uri);
                 PokemonSpecies pokemonSpecies = JsonConvert.DeserializeObject<PokemonSpecies>(response);
                 pokemon = MapperService.MapToPokemon(pokemonSpecies);
                 this.TranslateDescription(pokemon);
                 _cacheManager.Set(name, pokemon);
             }
 
-            
             return pokemon;
         }
 
@@ -48,19 +49,23 @@ namespace Pokedex.Services
         public async void TranslateDescription(Pokemon pokemon)
         {
             string habitat = _configuration["spclHabitat"];
-            string trnDesc = string.Empty;
-            TranslationApiClient trnClient = new(_configuration);
+            string uri = _configuration["Urls:shakespeareApi"];
+            TranslationApiClient trnClient = new();
             if (pokemon.IsLegendary || pokemon.Habitat.Equals(habitat))
             {
-                trnDesc = await trnClient.GetAsyncYoda(pokemon.Description);
+                uri = _configuration["Urls:yodaApi"];
             }
-            else
+
+            string sanitizedDesc = Sanitizer.GetSafeHtmlFragment(pokemon.Description);
+
+            string contentstr = await trnClient.GetResponseAsync(sanitizedDesc, uri);
+
+            TranslationContent trnContent = JsonConvert.DeserializeObject<TranslationContent>(contentstr);
+
+            if (trnContent != null && trnContent.contents != null && !string.IsNullOrEmpty(trnContent.contents.translated))
             {
-                trnDesc = await trnClient.GetAsyncShakespeare(pokemon.Description);
+                pokemon.Description = trnContent.contents.translated;
             }
-
-            pokemon.Description = trnDesc;
         }
-
     }
 }

@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pokedex.Filters;
-using Pokedex.Services;
-using Pokedex.Models;
-using Microsoft.Extensions.Caching.Memory;
 using Pokedex.Cache;
+using Pokedex.Filters;
+using Pokedex.Models;
+using Pokedex.Services;
 
 namespace Pokedex.Controllers
 {
 
     [ApiController]
-    [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

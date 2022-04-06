@@ -28,7 +28,7 @@ namespace Pokedex.Cache
 
         public void Set(string name, object obj)
         {
-            _translatedMemoryCache.Set(name,obj, _cacheOptions);
+            _translatedMemoryCache.Set(name, obj, _cacheOptions);
         }
 
         public void Remove(string name)

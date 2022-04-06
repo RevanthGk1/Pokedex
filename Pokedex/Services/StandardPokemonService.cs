@@ -28,8 +28,9 @@ namespace Pokedex.Services
             Pokemon pokemon = (Pokemon)_cacheManager.Get(name);
             if (pokemon == null || string.IsNullOrEmpty(pokemon.Description))
             {
-                PokeApiClient client = new(_configuration);
-                string response = await client.GetPokemonByNameAsync(name, CancellationToken.None);
+                PokeApiClient client = new();
+                string uri = _configuration["Urls:pokiApi"];
+                string response = await client.GetPokemonByNameAsync(name, uri);
                 PokemonSpecies pokemonSpecies = JsonConvert.DeserializeObject<PokemonSpecies>(response);
                 pokemon = MapperService.MapToPokemon(pokemonSpecies);
                 _cacheManager.Set(name, pokemon);
