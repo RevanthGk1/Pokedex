@@ -20,11 +20,12 @@ namespace Pokedex.Tests
         {
             //Arrange
             PokemonSpecies pokemonSpecies = GetPokemonSpecies();
-            string extractedDesc = "As it grows, the\nstone portions of\nits body harden\fto become similar\nto a diamond, but\ncolored black.";
+            string extractedDesc = "As it grows, the\nstone portions of\nits body hardento become similar\nto a diamond, but\ncolored black.";
 
             //Act
             Pokemon pokemon = MapperService.MapToPokemon(pokemonSpecies);
-
+            
+            //Assert
             Assert.AreEqual(pokemonSpecies.Id, pokemon.Id);
             Assert.AreEqual(pokemonSpecies.Habitat.Name, pokemon.Habitat);
             Assert.AreEqual(extractedDesc, pokemon.Description);
