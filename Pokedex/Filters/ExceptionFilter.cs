@@ -14,7 +14,7 @@ namespace Pokedex.Filters
 
         public void OnException(ExceptionContext context)
         {
-            if (context.HttpContext.Response.StatusCode == StatusCodes.Status200OK && context.Exception.Message.Contains(StatusCodes.Status404NotFound))
+            if (context.HttpContext.Response.StatusCode == StatusCodes.Status200OK && context.Exception.Message.Contains(StatusCodes.Status404NotFound.ToString()))
             {
                 context.Result = new NotFoundObjectResult("Pokemon Not found");
                 context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound; // If the PokiAPi Server could send proper Status code that could have avoided above hardcoded condition & this hardcoding of statuscode.
