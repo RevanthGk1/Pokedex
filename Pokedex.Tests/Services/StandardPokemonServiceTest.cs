@@ -20,8 +20,7 @@ namespace PokedexTests.Tests
 
             var builder = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                        .AddEnvironmentVariables();
+                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);                       
 
             IConfigurationRoot configuration = builder.Build();
             StandardCacheManager svc = new StandardCacheManager(configuration);
