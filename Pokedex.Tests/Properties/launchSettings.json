@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Pokedex.Tests": {
+      "commandName": "Project",
+      "hotReloadEnabled": false,
+      "nativeDebugging": true
+    }
+  }
+}

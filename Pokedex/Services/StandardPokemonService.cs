@@ -9,7 +9,6 @@ namespace Pokedex.Services
     public class StandardPokemonService 
     {
         private readonly IConfiguration _configuration;
-        private readonly IMemoryCache _memoryCache;
         private readonly StandardCacheManager _cacheManager;
 
         public StandardPokemonService(IConfiguration configuration, StandardCacheManager cacheManager)
