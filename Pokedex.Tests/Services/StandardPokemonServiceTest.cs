@@ -68,7 +68,7 @@ namespace PokedexTests.Tests
         }
 
 
-        public Pokemon GetPokemon(string name)
+        private Pokemon GetPokemon(string name)
         {
             Pokemon pokemonOnix = new Pokemon()
             {

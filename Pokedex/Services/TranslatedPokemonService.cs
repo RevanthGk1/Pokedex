@@ -42,10 +42,9 @@ namespace Pokedex.Services
         }
 
         /// <summary>
-        /// Calls the client to get the translation based on legendary status & habitat.
+        /// Calls the client to get the translation based on legendary status and habitat.
         /// </summary>
         /// <param name="pokemon">pokemon</param>
-        /// <returns>A <see cref="Task{Pokemon}"/> representing the result of the asynchronous operation.</returns>
         public async void TranslateDescription(Pokemon pokemon)
         {
             string habitat = _configuration["spclHabitat"];
@@ -57,11 +56,8 @@ namespace Pokedex.Services
             }
 
             string sanitizedDesc = Sanitizer.GetSafeHtmlFragment(pokemon.Description);
-
             string contentstr = await trnClient.GetResponseAsync(sanitizedDesc, uri);
-
             TranslationContent trnContent = JsonConvert.DeserializeObject<TranslationContent>(contentstr);
-
             if (trnContent != null && trnContent.contents != null && !string.IsNullOrEmpty(trnContent.contents.translated))
             {
                 pokemon.Description = trnContent.contents.translated;
