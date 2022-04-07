@@ -1,4 +1,4 @@
-=============================================================================
+=========================================================================
 
 System Requirements:
 
@@ -10,20 +10,35 @@ For running the Docker container:
 
     Docker : Download here: https://docs.docker.com/get-docker/
 
-==============================================================================
+==========================================================================
 
 Running the Project
 
-1. Dowload the project source code from Github: https://github.com/RevanthGk1/Pokedex-Challenge-Pvt-Rep.git
+1. Dowload the project source code from Github.
 2. Navigate to the "RunProject" folder in the downloaded Pokedex project. 
 
 Windows local machine:
 
-    Execute the "RunPokedex_Local.bat" file.
+    One Step Set up: Execute the "RunPokedex_Local.bat" file.
+    
+    (or Run the below commands manually - Path: Pokedex)
+    
+    dotnet build
+    
+    dotnet run --urls=http://localhost:5000/ 
+    
+    
 	
 Docker:
 
-    Execute the "RunPokedex_Docker.bat" file.
+    One Step Set up: Execute the "RunPokedex_Docker.bat" file.
+    
+    (or Run the below commands manually - Path: Pokedex\Pokedex)
+    
+    docker build -t pokedex:v1 .
+    
+    docker run -it --rm -p 5000:80 pokedex:v1
+    
 	
 
 Accessing the Endpoints:
@@ -44,4 +59,4 @@ If chrome is installed, execute the "StartChrome.bat" file to open chrome with p
 			Ex:http://localhost:5000/Pokemon/v1/Translated/onix
 	
 
-=================================================================================
+=============================================================================
