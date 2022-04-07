@@ -73,7 +73,8 @@ The above command creates a folder "TestResults" and nested unique folder with c
 
 =============================================================================
 
-		**Things that could be different for production:**
+**Things that could be different for production:**
+
 1. Have a different config for production (appsettings.production.json & appsettings.development.json)
 	Maintain different connection strings/Urls/Generic Error templates
 2. Some level of authorization (may be token based) just to avoid/slow down DDOS attacks.
@@ -87,8 +88,11 @@ The above command creates a folder "TestResults" and nested unique folder with c
 	For this we could maintain a API-Monitoring tool internally or there are also many tools available in the market.
 9. Set-Up auto-scaling in the server (in prometheus/Nginx etc)
 
+
 Design Decisions:
--> All the Errors/Exception shall be handled by the ExceptionFilter on the controller.
+
+-> All the Errors/Exception shall be handled by the ExceptionFilter on the controller and stack trace to be logged for errors.
+
 -> Stack trace showing up related to "Internal Server Error" is curbed deliberately. Just a Status Code of 500 is shown to the consumer. But the stack trace is logged.
 
 =============================================================================
