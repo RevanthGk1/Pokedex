@@ -1,6 +1,6 @@
 ﻿namespace Pokedex.ExtServices
 {
-    public class TranslationApiClient
+    public class TranslationApiClient : IDisposable
     {
         private HttpClient _client;
 
@@ -19,6 +19,11 @@
             }
 
             return contentstr;
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
         }
     }
 }

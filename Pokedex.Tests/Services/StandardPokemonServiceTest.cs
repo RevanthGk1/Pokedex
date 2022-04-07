@@ -7,12 +7,12 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PokedexTests.Tests
+namespace Pokedex.Tests
 {
     [TestClass()]
     public class StandardPokemonServiceTest
     {
-        internal StandardPokemonService _stdPokemonSvc;
+        private StandardPokemonService _stdPokemonSvc;
 
         [TestInitialize()]
         public void SetUp()

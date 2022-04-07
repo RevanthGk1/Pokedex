@@ -1,6 +1,6 @@
 ﻿namespace Pokedex.ExtServices
 {
-    public class PokeApiClient
+    public class PokeApiClient : IDisposable
     {
        
         private readonly HttpClient _client;
@@ -26,6 +26,11 @@
             }
 
             return content;
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
         }
     }
 }

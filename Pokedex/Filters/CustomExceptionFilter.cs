@@ -21,9 +21,9 @@ namespace Pokedex.Filters
             }
             else
             {
-                _logger.LogError(context.Exception, context.Exception.Message.ToString());
+                _logger.LogError(context.Exception, context.Exception.StackTrace);
+                context.Result = new  StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
-            
         }
     }
 }

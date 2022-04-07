@@ -1,9 +1,9 @@
-﻿namespace Pokedex.Filters
-{
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
-    using Microsoft.Security.Application;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Security.Application;
 
+namespace Pokedex.Filters
+{
     public class ValidationFilter : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
