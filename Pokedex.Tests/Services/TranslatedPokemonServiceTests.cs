@@ -28,36 +28,6 @@ namespace PokedexTests.Tests
             _trnPokemonSvc = new TranslatedPokemonService(configuration, svc);
         }
 
-        //Have to remove this - private method
-        [TestMethod()]
-        public async Task TranslateDescriptionTest_ValidPokemon_ReturnsTranslatedValidPokemonAsync()
-        {
-            //Arrange
-            string nameOnix = "onix";
-            string namePikachu = "pikachu";
-            Pokemon pokemonOnix = GetPokemon(nameOnix);
-            Pokemon pokemonPikachu = GetPokemon(namePikachu);
-
-            //Expected
-            Pokemon expPokemonOnix = GetExpectedPokemon(nameOnix);
-            Pokemon expPokemonPikachu = GetExpectedPokemon(namePikachu);
-
-            // Act
-            _trnPokemonSvc.TranslateDescription(pokemonOnix);
-            _trnPokemonSvc.TranslateDescription(pokemonPikachu);
-
-            // Assert
-            Assert.IsNotNull(pokemonOnix);
-            Assert.IsNotNull(pokemonPikachu);
-            Assert.AreEqual(expPokemonOnix.Id, pokemonOnix.Id);
-            Assert.AreEqual(expPokemonPikachu.Id, pokemonPikachu.Id);
-            Assert.AreEqual(expPokemonOnix.Description, pokemonOnix.Description);
-            Assert.AreEqual(expPokemonPikachu.Description, pokemonPikachu.Description);
-        }
-
-
-
-
         [TestMethod()]
         public async Task GetAsyncTest_ValidName_ReturnsValidPokemonAsync()
         {
@@ -77,6 +47,7 @@ namespace PokedexTests.Tests
             Assert.IsNotNull(resPokemonOnix);
             Assert.IsNotNull(resPokemonPikachu);
             Assert.AreEqual(expPokemonOnix.Id, resPokemonOnix.Id);
+            Assert.AreEqual(expPokemonPikachu.Id, resPokemonPikachu.Id);
             Assert.AreEqual(expPokemonOnix.Description, resPokemonOnix.Description);
             Assert.AreEqual(expPokemonPikachu.Description, resPokemonPikachu.Description);
 
@@ -95,34 +66,6 @@ namespace PokedexTests.Tests
             string name = "<script>";
 
             await Assert.ThrowsExceptionAsync<HttpRequestException>(() => _trnPokemonSvc.GetAsync(name));
-        }
-
-        private Pokemon GetPokemon(string name)
-        {
-            Pokemon pokemonOnix = new Pokemon()
-            {
-                Name = "onix",
-                Id = 95,
-                Description = "Opening its large mouth, it ingests\nmassive amounts of soil and creates\nlong tunnels.",
-                Habitat = "cave",
-                IsLegendary = false
-            };
-
-            Pokemon pokemonPikachu = new Pokemon()
-            {
-                Name = "pikachu",
-                Id = 25,
-                Description = "When several of\nthese POKéMON\ngather, their\felectricity could\nbuild and cause\nlightning storms.",
-                Habitat = "forest",
-                IsLegendary = false
-            };
-
-            if (name == "onix")
-            {
-                return pokemonOnix;
-            }
-
-            return pokemonPikachu;
         }
 
         public Pokemon GetExpectedPokemon(string name)

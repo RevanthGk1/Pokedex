@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Security.Application;
+﻿using Microsoft.Security.Application;
 using Newtonsoft.Json;
 using Pokedex.Cache;
 using Pokedex.ExtServices;
@@ -10,7 +9,6 @@ namespace Pokedex.Services
     public class TranslatedPokemonService
     {
         private readonly IConfiguration _configuration;
-        private readonly IMemoryCache _memoryCache;
         private readonly TranslatedCacheManager _cacheManager;
 
         public TranslatedPokemonService(IConfiguration configuration, TranslatedCacheManager cacheManager)
@@ -45,7 +43,7 @@ namespace Pokedex.Services
         /// Calls the client to get the translation based on legendary status and habitat.
         /// </summary>
         /// <param name="pokemon">pokemon</param>
-        public async void TranslateDescription(Pokemon pokemon)
+        private async void TranslateDescription(Pokemon pokemon)
         {
             string habitat = _configuration["spclHabitat"];
             string uri = _configuration["Urls:shakespeareApi"];
