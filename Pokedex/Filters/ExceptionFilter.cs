@@ -14,13 +14,14 @@ namespace Pokedex.Filters
 
         public void OnException(ExceptionContext context)
         {
-            if (context.HttpContext.Response.StatusCode == StatusCodes.Status200OK)
+            if (context.HttpContext.Response.StatusCode == StatusCodes.Status200OK && context.Exception.Message.Contains(StatusCodes.Status404NotFound))
             {
                 context.Result = new NotFoundObjectResult("Pokemon Not found");
+                context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound; // If the PokiAPi Server could send proper Status code that could have avoided above hardcoded condition & this hardcoding of statuscode.
             }
             else
             {
-                _logger.LogError(context.Exception, context.HttpContext.Request.Body.ToString());
+                _logger.LogError(context.Exception, context.Exception.Message.ToString());
             }
             
         }

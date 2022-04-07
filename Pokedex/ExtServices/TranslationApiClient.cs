@@ -9,7 +9,7 @@
             _client = new HttpClient();
         }
 
-        internal async Task<string> GetResponseAsync(string desc, string uri)
+        public async Task<string> GetResponseAsync(string desc, string uri)
         {
             string contentstr = string.Empty;
 
