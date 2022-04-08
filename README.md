@@ -1,6 +1,6 @@
 =========================================================================
 
-System Requirements:
+# System Requirements:
 
 For running the project on local machine:
 
@@ -12,7 +12,7 @@ For running the Docker container:
 
 ==========================================================================
 
-Running the Project
+# Running the Project
 
 1. Dowload the project source code from Github.
 2. Navigate to the "RunProject" folder in the downloaded Pokedex project. 
@@ -62,7 +62,7 @@ If chrome is installed, execute the "StartChrome.bat" file to open chrome with p
 =============================================================================
 
 
-Executing Unit Tests & Generating Code Coverage Results in XML:
+# Executing Unit Tests & Generating Code Coverage Results in XML:
 
 Navigate to path: Pokedex\Pokedex.Tests  and execute below command:
 
@@ -73,7 +73,7 @@ The above command creates a folder "TestResults" and nested unique folder with c
 
 =============================================================================
 
-**Things that could be different for production:**
+# Things that could be different for production:
 
 1. Have a different config for production (appsettings.production.json & appsettings.development.json)
 	Maintain different connection strings/Urls/Generic Error templates
