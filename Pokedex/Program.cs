@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Pokedex.Cache;
+using Pokedex.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSingleton(typeof(StandardCacheManager));
 
 builder.Services.AddSingleton(typeof(TranslatedCacheManager));
+
+builder.Services.AddSingleton(typeof(StandardPokemonService));
 
 builder.Services.AddSwaggerGen(c =>
 {

@@ -21,12 +21,14 @@ namespace Pokedex.Controllers
         private readonly ILogger<StandardPokemonController> _logger;
         private readonly IConfiguration _configuration;
         private readonly StandardCacheManager _cacheManager;
+        private readonly StandardPokemonService _svc;
 
-        public StandardPokemonController(ILogger<StandardPokemonController> logger, IConfiguration configuration, StandardCacheManager cacheManager)
+        public StandardPokemonController(ILogger<StandardPokemonController> logger, IConfiguration configuration, StandardCacheManager cacheManager, StandardPokemonService svc)
         {
             _logger = logger;
             _configuration = configuration;
             _cacheManager = cacheManager;
+            _svc = svc;
         }
 
         /// <summary>
@@ -38,8 +40,8 @@ namespace Pokedex.Controllers
         [Route("{name?}")]
         public IActionResult Get(string? name)
         {
-            StandardPokemonService svc = new(_configuration, _cacheManager);
-            Task<Pokemon> pokemon = svc.GetAsync(name);
+            //StandardPokemonService svc = new(_configuration, _cacheManager);
+            Task<Pokemon> pokemon = _svc.GetAsync(name);
             return Ok(pokemon.Result);
         }
     }
